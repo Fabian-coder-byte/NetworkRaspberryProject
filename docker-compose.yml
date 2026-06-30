@@ -1,10 +1,3 @@
-version: '3.8'
-
-# network_mode: host permette al backend di scansionare la rete LAN reale.
-# Pro: nmap vede tutti i dispositivi, nessuna configurazione IP aggiuntiva.
-# Contro: il container condivide la rete dell'host, nessun isolamento di rete Docker.
-# Soluzione adottata: host mode per backend + nginx proxy per frontend.
-
 services:
   backend:
     build:
@@ -17,7 +10,7 @@ services:
       - ./data:/app/data
     environment:
       - NODE_ENV=production
-      - PORT=3001
+      - PORT=3010
       - DB_PATH=/app/data/network-map.db
       - SCAN_INTERVAL_MINUTES=5
     cap_add:
