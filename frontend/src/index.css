@@ -2,9 +2,6 @@
 @tailwind components;
 @tailwind utilities;
 
-/* React Flow — must import its CSS for edges and controls to render */
-@import 'reactflow/dist/style.css';
-
 body {
   @apply bg-slate-900 text-slate-100;
   font-family: 'Inter', system-ui, sans-serif;

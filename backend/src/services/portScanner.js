@@ -67,7 +67,7 @@ async function scanDevicePorts(deviceId) {
   return { scanId, ports, scannedAt: now };
 }
 
-async function getLatestPorts(deviceId) {
+function getLatestPorts(deviceId) {
   const scan = db.prepare(
     'SELECT id FROM port_scans WHERE device_id = ? ORDER BY scanned_at DESC LIMIT 1'
   ).get(deviceId);

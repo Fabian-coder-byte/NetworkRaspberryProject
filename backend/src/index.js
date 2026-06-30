@@ -20,12 +20,21 @@ app.use('/api/network/devices', devicesRoutes);
 app.use('/api/network/alerts',  alertsRoutes);
 app.use('/api/network',         networkRoutes);
 
+// Quick liveness probe — useful to test if nginx proxy is working
+app.get('/api/ping', (req, res) => res.json({ pong: true, time: Date.now() }));
+
 app.get('/api/health', (req, res) => {
   res.json({ status: 'ok', uptime: Math.floor(process.uptime()) });
 });
 
+// 404 fallback — log unmatched routes to help debugging
+app.use((req, res) => {
+  console.warn(`404 — no route for ${req.method} ${req.path}`);
+  res.status(404).json({ error: `Route not found: ${req.method} ${req.path}` });
+});
+
 app.use((err, req, res, _next) => {
-  console.error(err);
+  console.error('Unhandled error:', err);
   res.status(500).json({ error: 'Internal server error' });
 });
 
