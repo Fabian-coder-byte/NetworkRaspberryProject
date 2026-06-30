@@ -10,7 +10,7 @@ services:
       - ./data:/app/data
     environment:
       - NODE_ENV=production
-      - PORT=3010
+      - PORT=7010
       - DB_PATH=/app/data/network-map.db
       - SCAN_INTERVAL_MINUTES=5
     cap_add:
